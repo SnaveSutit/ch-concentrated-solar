@@ -3,12 +3,12 @@ local hit_effects = require("__base__.prototypes.entity.hit-effects")
 
 data:extend {
 	{
-		type = "turret",
-		name = data_util.mod_prefix .. "heliostat-mirror",
-		flags = { "placeable-neutral", "player-creation" },
+		type                           = "turret",
+		name                           = data_util.mod_prefix .. "heliostat-mirror",
+		flags                          = { "placeable-neutral", "player-creation" },
 
-		icon = data_util.sprite "icons/heliostat-mirror-icon.png",
-		icon_size = 64,
+		icon                           = data_util.sprite "icons/heliostat-mirror-icon.png",
+		icon_size                      = 64,
 		drawing_box_vertical_extension = 0.5,
 
 		--show_recipe_icon = false,
@@ -59,8 +59,7 @@ data:extend {
 								draw_as_shadow = true,
 								direction_count = 1,
 								frame_count = 1,
-								shift = util.by_pixel(-4, 6),
-
+								shift = util.by_pixel(1, 9),
 							}
 						}
 					}

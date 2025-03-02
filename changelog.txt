@@ -1,11 +1,13 @@
 ---------------------------------------------------------------------------------------------------
-Version: 0.4.5
+Version: 0.5.0
 Date: 2024.12.28
   Changes:
     - [Credit: snouz] Redone icons / tech icons / achievement / thumbnail
     - [Credit: snouz] Slightly edited some entities
     - [Credit: snouz] Fixed turret tower displaying behind object on ground
     - [Credit: snouz] Fixed some shadow positions
+  Bugfixes:
+    - [Credit: ACCount12] Fixed mirrors not initializing when build on space platforms
 ---------------------------------------------------------------------------------------------------
 Version: 0.4.4
 Date: 2024.12.26
