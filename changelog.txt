@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.5.1
+Date: 2025.07.19
+  Changes:
+    - [Credit: PirateSeal] French translation
+  Bugfixes:
+    - [Assist: TheOldOne] Better support for SA - respect (second) surface power multiplier field
+---------------------------------------------------------------------------------------------------
 Version: 0.5.0
 Date: 2024.12.28
   Changes:

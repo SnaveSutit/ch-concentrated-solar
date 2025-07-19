@@ -38,13 +38,22 @@ shared_util.mirror_groups = 100
 ---@type uint
 local max_mirrors_per_tower = math.ceil(shared_util.solar_max_temp / shared_util.fluid_temp_per_mirror)
 
+-- Surface solar multiplier of surface, with SA 'surface param'
+---@nodiscard
+---@param surface LuaSurface
+---@return number
+function shared_util.surface_solar_mult(surface)
+	return surface.solar_power_multiplier *     -- Normal mult
+		(surface.get_property("solar-power") / 100.0) -- Annoying space age mult >:(
+end
+
 -- Maximum mirrors to fully saturate a tower, based on the solar power multiplier of its surface.
 -- Tower can be any reference entity, as long as it is on the current surface
 ---@nodiscard
 ---@param surface LuaSurface
 ---@return number
 function shared_util.surface_max_mirrors(surface)
-	return math.ceil(max_mirrors_per_tower / surface.solar_power_multiplier)
+	return math.ceil(max_mirrors_per_tower / shared_util.surface_solar_mult(surface))
 end
 
 return shared_util

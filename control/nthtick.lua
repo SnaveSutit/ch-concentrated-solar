@@ -82,7 +82,9 @@ function nthtick.on_nth_tick_tower_update(event)
 				tower.clear_fluid_inside()
 
 				if sun > 0 and table_size(mirrors) > 0 then
-					local amount = tower.surface.solar_power_multiplier * control_util.fluid_temp_per_mirror * sun *
+					local amount = control_util.surface_solar_mult(tower.surface) *
+						control_util.fluid_temp_per_mirror *
+						sun *
 						table_size(mirrors)
 
 					-- game.print("updating tower " .. tid .. "power" .. amount)
