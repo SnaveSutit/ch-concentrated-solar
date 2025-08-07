@@ -1,6 +1,5 @@
 local data_util = require("data-util")
 local sounds = require("__base__.prototypes.entity.sounds")
-local util = require "util"
 local hit_effects = require("__base__.prototypes.entity.hit-effects")
 
 
