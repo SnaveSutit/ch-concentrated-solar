@@ -75,6 +75,9 @@ data:extend {
 		activation_buffer_ratio = 1 / 6,
 		fluid_buffer_size = data_util.solar_max_temp,
 
+		circuit_connector = circuit_connector_definitions["storage-tank"],
+		circuit_wire_max_distance = default_circuit_wire_max_distance,
+
 		attack_parameters =
 		{
 			type              = "stream",
