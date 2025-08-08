@@ -79,7 +79,6 @@ function nthtick.on_nth_tick_tower_update(event)
 			if db.valid_tid(tid) then
 				local sun = control_util.calc_sun(tower.surface)
 
-				tower.clear_fluid_inside()
 
 				if sun > 0 and table_size(mirrors) > 0 then
 					local amount = control_util.surface_solar_mult(tower.surface) *
@@ -87,13 +86,18 @@ function nthtick.on_nth_tick_tower_update(event)
 						sun *
 						table_size(mirrors)
 
+					local current_amount = tower.get_fluid_count("chcs-solar-fluid")
+					local capacity = tower.fluidbox.get_capacity(1)
+					local required_amount_to_refill =
+						math.min(math.ceil(amount - current_amount), capacity)
+
 					-- game.print("updating tower " .. tid .. "power" .. amount)
 
 					-- set to temperature and amount, as fluid turrets cannot display temperature
-					if amount > 0.01 then
+					if required_amount_to_refill > 0.01 then
 						tower.insert_fluid {
 							name        = control_util.mod_prefix .. "solar-fluid",
-							amount      = amount,
+							amount      = required_amount_to_refill,
 							temperature = amount * (1.0 + tower.quality.level * 0.3)
 						}
 					end
