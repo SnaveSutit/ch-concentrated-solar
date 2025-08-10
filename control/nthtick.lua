@@ -1,8 +1,8 @@
-local nthtick = {}
+local nthtick      = {}
 
 local control_util = require "control-util"
-local beams = require "control.beams"
-local db = require "control.database"
+local beams        = require "control.beams"
+local db           = require "control.database"
 
 function nthtick.on_nth_tick_beam_update(event)
 	--control_util.consistencyCheck()
@@ -92,7 +92,7 @@ function nthtick.on_nth_tick_tower_update(event)
 					local current_amount = 0
 
 					if fluid ~= nil then
-						current_amount = fluid[control_util.mod_prefix .. "solar-fluid"]
+						current_amount = fluid[control_util.mod_prefix .. "solar-fluid"] or 0
 					end
 
 					local input_amount = target_amount - current_amount
