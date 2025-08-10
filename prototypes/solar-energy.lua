@@ -68,8 +68,44 @@ data:extend {
 		name = data_util.mod_prefix .. "solar-beam",
 		flags = { "not-on-map" },
 		width = 1,
-		damage_interval = 20,
+		damage_interval = 1,
 		random_target_offset = true,
+		action =
+		{
+			{
+				type = "direct",
+				action_delivery =
+				{
+					type = "instant",
+					target_effects =
+					{
+						type = "create-fire",
+						entity_name = "fire-flame",
+						check_buildability = true
+					},
+				}
+			},
+			{
+				type = "area",
+				radius = 2.5,
+				action_delivery =
+				{
+					type = "instant",
+					target_effects =
+					{
+						{
+							type = "damage",
+							damage = {
+								type = "laser",
+								amount = data_util.solar_laser_damage
+							},
+							apply_damage_to_trees = false
+						}
+					}
+				}
+			}
+		},
+
 		graphics_set = {
 			beam = {
 				head = solar_beam,

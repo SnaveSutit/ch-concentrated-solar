@@ -82,6 +82,12 @@ if mods["Krastorio2"] then
 			settings.startup["ch-k2-production-mult"].value)
 end
 
+-- Base damage off of the max power output of the solar power tower, and the laser turret's damage.
+data_util.solar_laser_damage =
+	data_util.solar_max_production_mw
+	/ 4 -- Divide by average laser turret MW/s draw
+	* 30 -- Multiply by base laser turret DPS
+	/ 60 -- Divide by 60 to adjust for per-tick attack speed
 
 -- (per second)
 data_util.solar_max_consumption = 1
