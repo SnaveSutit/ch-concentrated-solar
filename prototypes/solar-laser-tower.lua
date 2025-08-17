@@ -2,7 +2,6 @@ local data_util = require("data-util")
 local sounds = require("__base__.prototypes.entity.sounds")
 local hit_effects = require("__base__.prototypes.entity.hit-effects")
 
-
 local lens_height = -13.1
 
 local function solar_laser_turret_extension(inputs)
@@ -50,9 +49,9 @@ data:extend {
 		selection_box = { { -2.5, -2.5 }, { 2.5, 2.5 } },
 		drawing_box = { { -2.5, -14.5 }, { 2.5, 2.5 } },
 		damaged_trigger_effect = hit_effects.entity(),
-		rotation_speed = 0.01,
-		preparing_speed = 0.05,
-		folding_speed = 0.05,
+		rotation_speed = 0.0025,
+		preparing_speed = 0.025,
+		folding_speed = 0.025,
 		preparing_sound = sounds.laser_turret_activate,
 		folding_sound = sounds.laser_turret_deactivate,
 		corpse = "medium-remnants",
@@ -60,6 +59,13 @@ data:extend {
 		radius_visualisation_specification = {
 			sprite = { filename = data_util.sprite "solar-power-tower-radius-visualisation.png", size = 12 },
 			distance = data_util.tower_capture_radius
+		},
+		resistances =
+		{
+			{
+				type = "fire",
+				percent = 100
+			}
 		},
 		-- SE Compat
 		se_allow_in_space = true,
@@ -79,59 +85,27 @@ data:extend {
 		{
 			type              = "stream",
 			fluids            = { { type = data_util.mod_prefix .. "solar-fluid" } },
-			-- fluid_consumption = 1,
-			-- warmup = 1,
+
 			cooldown          = 1,
 			range             = 150,
-			min_range         = 6,
+			min_range         = 72 * 1.4 / 2.0 + 4.0, -- Half of the diagonal distance of the 72x72 solar panel area + 4.
 			turn_range        = 1.5 / 3.0,
-			fluid_consumption = 10,
-			--source_direction_count = 64,
-			--source_offset = { 0, -3.423489 / 4 },
+			fluid_consumption = 600 / 60,
+			turn_penalty      = 2000,
+
 			ammo_category     = "laser",
-			damage_modifier   = 1,
 			ammo_type         =
 			{
 				action =
 				{
+					type = "direct",
+					action_delivery =
 					{
-						type = "direct",
-						action_delivery =
-						{
-							type = "beam",
-							beam = data_util.mod_prefix .. "solar-beam",
-							max_length = 50,
-							duration = 30,
-							source_offset = { 0, -13 },
-							target_effects = {
-								{
-									type = "create-fire",
-									entity_name = "fire-flame",
-									check_buildability = true
-								},
-								-- {
-								-- 	type = "script",
-								-- 	effect_id = data_util.mod_prefix .. "sunlight-laser-damage"
-								-- },
-							}
-						},
+						type = "beam",
+						beam = data_util.mod_prefix .. "solar-beam",
+						max_length = 150,
+						source_offset = { 0, -13 },
 					},
-					{
-						type = "area",
-						radius = 2.5,
-						action_delivery =
-						{
-							type = "instant",
-							target_effects =
-							{
-								{
-									type = "damage",
-									damage = { amount = 3, type = "laser" },
-									apply_damage_to_trees = false
-								}
-							}
-						}
-					}
 				}
 			}
 		},
@@ -225,7 +199,6 @@ data:extend {
 		vehicle_impact_sound = sounds.generic_impact,
 		is_military_target = true,
 		turret_base_has_direction = true,
-
 
 		call_for_help_radius = 40,
 		--water_reflection =
